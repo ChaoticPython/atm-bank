@@ -33,3 +33,12 @@ En esta sección iremos tomando notas de los comandos que hemos estado utilizand
 * Hacemos **commit** de los cambios y luego un **push** pero a la nueva rama que creamos (**development**).
 * Ahora creamos una nueva rama llamada **feature/initial-dev** en donde vamos a trabajar con todos los 
   cambios que realizemos en nuestra aplicación, con el fin de no afectar el desarrollo en development.
+* Una vez haciendo cambios en el proyecto, guardamos todo (o lo necesario) y hacemos **commit - push** para 
+  luego hacer un **Pull Request**.
+  **NOTA:** es importante realizar este paso con ayuda de otra cuenta para tener un mejor control de revisión.
+* El **Pull Request** lo hacemos de nuestra branch (**feature/initial-dev**) a la branch **development**.
+* Se debe de tener en cuenta que en un **Pull Request** se hará revisión de todo lo que se haya actualizado,
+  agregado o eliminado.
+* Luego del **Pull Request** mantendremos nuestra branch y continuaremos trabajando.
+  Esto es un ciclo, a partir de éste punto solo se trabaja en la branch **feature/initial-dev** y se hace
+  **Pull Request** a la branch **development**.
