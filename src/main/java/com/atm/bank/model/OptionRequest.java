@@ -9,7 +9,8 @@ public class OptionRequest {
 
   private Integer pin;
   private String option;
-  private String deceiver;
+  private String receiver;
   private Double amount;
+  private Card card;
   
 }
