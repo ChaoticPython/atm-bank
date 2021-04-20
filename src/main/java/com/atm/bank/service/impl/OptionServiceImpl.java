@@ -18,25 +18,29 @@ public class OptionServiceImpl implements IOptionService {
   public MessageResponse retrieveMessageResponse(OptionRequest request) {
     // TODO Auto-generated method stub
     MessageResponse response = new MessageResponse();
-    if (request.getOption().equals("Check Balance")) {
-      response.setMessage(optionDao.checkBalance(request.getCard()));
-    } 
-    if (request.getOption().equals("Deposit")) {
-      response.setMessage(optionDao.depositMoney(request.getCard(), request.getAmount()));
-    }
-    if (request.getOption().equals("Withdraw")) {
-      if (verify(request.getCard().getAmount(), request.getAmount())) {
-        response.setMessage(optionDao.withdrawMoney(request.getCard(), request.getAmount()));
+    // You only can do the operations if you put the correct pin
+    if(request.getPin() == request.getCard().getPin()) {
+      if (request.getOption().equals("Check Balance")) {
+        response.setMessage(optionDao.checkBalance(request.getCard()));
+      } else if (request.getOption().equals("Deposit")) {
+        response.setMessage(optionDao.depositMoney(request.getCard(), request.getAmount()));
+      } else if (request.getOption().equals("Withdraw")) {
+        if (verify(request.getCard().getAmount(), request.getAmount())) {
+          response.setMessage(optionDao.withdrawMoney(request.getCard(), request.getAmount()));
+        } else {
+          // Throw an exception - you don't have enough balance to do this operation
+        }
+      } else if (request.getOption().equals("Transfer to other Account")) {
+        if (verify(request.getCard().getAmount(), request.getAmount())) {
+          response.setMessage(optionDao.transferMoney(request.getCard(), request.getReceiver(), request.getAmount()));
+        } else {
+          // Throw an exception - you don't have enough balance to do this operation
+        }
       } else {
-        // Throw an exception
+          // Throw an exception - the operation doesn't exist
       }
-    } 
-    if (request.getOption().equals("Transfer to other Account")) {
-      if (verify(request.getCard().getAmount(), request.getAmount())) {
-        response.setMessage(optionDao.transferMoney(request.getCard(), request.getReceiver(), request.getAmount()));
-      } else {
-        // Throw an exception
-      }
+    } else {
+      // Throw an exception - pin error (it doesn't match with the pin in the card)
     }
     return response;
   }

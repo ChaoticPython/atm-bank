@@ -1,0 +1,5 @@
+atm-bank:
+  context:
+    path: /api
+  paths: 
+    option: /v1/atm
