@@ -9,6 +9,9 @@ import com.atm.bank.model.OptionRequest;
 import com.atm.bank.service.IOptionService;
 import com.atm.bank.service.IVerifyRequestService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class VerifyRequestServiceImpl implements IVerifyRequestService {
 
@@ -22,18 +25,22 @@ public class VerifyRequestServiceImpl implements IVerifyRequestService {
     // creation of a dummy card
     request.setCard(createCard());
     // If our PIN, the card or the option are null, we can't proceed with the request
+    log.info("Verificando petición...");
     if (request.getPin() == null || request.getOption() == null || request.getCard() == null) {
       // Throw an exception - you need a pin and option to do any operation
+      log.info("Ocurrio un error");
     } else {
-      response = optionService.retrieveMessageResponse(request); // Invoke the other service
+      log.info("Procesando petición...");
+      // Invoke the other service
+      response = optionService.retrieveMessageResponse(request);
     }
     return response;
   }
 
-  private Card createCard() {
+  private static Card createCard() {
     Card card = new Card();
     card.setPin(1539);
-    card.setAmount(12744.96);
+    card.setAmount((double) Math.round(Math.random() * 100000));
     return card;
   }
   
