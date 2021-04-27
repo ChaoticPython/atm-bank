@@ -3,6 +3,7 @@ package com.atm.bank.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.atm.bank.exception.BadRequestException;
 import com.atm.bank.model.Card;
 import com.atm.bank.model.MessageResponse;
 import com.atm.bank.model.OptionRequest;
@@ -25,12 +26,13 @@ public class VerifyRequestServiceImpl implements IVerifyRequestService {
     // creation of a dummy card
     request.setCard(createCard());
     // If our PIN, the card or the option are null, we can't proceed with the request
-    log.info("Verificando petición...");
+    log.info("Verifying request...");
     if (request.getPin() == null || request.getOption() == null || request.getCard() == null) {
       // Throw an exception - you need a pin and option to do any operation
-      log.info("Ocurrio un error");
+      log.info("An error has occurred");
+      throw new BadRequestException("The request received is null or doesn't have all the attributes");
     } else {
-      log.info("Procesando petición...");
+      log.info("Verifying request...");
       // Invoke the other service
       response = optionService.retrieveMessageResponse(request);
     }
