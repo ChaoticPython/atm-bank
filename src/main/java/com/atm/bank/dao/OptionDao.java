@@ -13,20 +13,20 @@ public class OptionDao {
   
   public String depositMoney(Card card, Double amountToDeposit) {
     card.setAmount(card.getAmount() + amountToDeposit);
-    return "Operation (deposit) completed successfully\n" + "Your actual amount is:"
-        + card.getAmount() + "\nDon't forget to take your card";
+    return "Operation (deposit) completed successfully." + " Your actual amount is: "
+        + card.getAmount() + ". Don't forget to take your card";
   }
 
   public String withdrawMoney(Card card, Double withdrawAmount) {
     card.setAmount(card.getAmount() - withdrawAmount);
-    return "Operation (withdraw) completed successfully\n" + "Your actual amount is:"
-        + card.getAmount() + "\nDon't forget to take your card";
+    return "Operation (withdraw) completed successfully." + " Your actual amount is: "
+        + card.getAmount() + ". Don't forget to take your card";
   }
 
-  public String transferMoney(Card card, String otherAccount, Double amountToTransfer) {
+  public String transferMoney(Card card, Double amountToTransfer) {
     card.setAmount(card.getAmount() - amountToTransfer);
-    return "The transaction for the " + otherAccount + " account has been successful\n"
-        + "The actual amount in your account is:" + card.getAmount();
+    return "The transaction for the other account has been successful."
+        + " The actual amount in your account is: " + card.getAmount();
   }
 
 }
