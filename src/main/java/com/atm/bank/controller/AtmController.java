@@ -12,9 +12,6 @@ import com.atm.bank.model.MessageResponse;
 import com.atm.bank.model.OptionRequest;
 import com.atm.bank.service.IVerifyRequestService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @RestController
 @RequestMapping("${atm-bank.context.path}")
 public class AtmController {
@@ -24,7 +21,6 @@ public class AtmController {
 
   @PostMapping("${atm-bank.paths.option}")
   public ResponseEntity<MessageResponse> messageResponse(@RequestBody OptionRequest request) {
-    log.info("Request received, processing...");
     MessageResponse response = requestService.retrieveMessageResponse(request);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
